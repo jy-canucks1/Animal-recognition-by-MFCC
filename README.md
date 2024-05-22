@@ -5,7 +5,7 @@ Part 1 : Analyze and preprocess MFCC
 Part 2 : Train Animal Sound Recognition Models
 
 ## Dataset
-___
+
 * The dataset is from: [https://github.com/YashNita/Animal-Sound-Dataset](https://github.com/YashNita/Animal-Sound-Dataset)
 * Converted Stereo to Mono and then Removed the stereo file
 * Each mfcc is truncated or padded with 0 to keep the same size of mfcc coefficients sample (130, 13)
@@ -23,7 +23,6 @@ The horizontal pairs are in the same Category (1st row: Cat, 2nd row: Lion, 3rd 
 
 
 ## Model
-___
 
 * Tested 3 models : KNN, AdaBoost, CNN
 ### KNN (K-Nearest Neighbors)
@@ -76,7 +75,6 @@ ___
 
 
 ## Conclusion
-___
 
 ### Why all models were not accurate? (All accuracies < 90%)
 ___
