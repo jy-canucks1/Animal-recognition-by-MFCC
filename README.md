@@ -53,7 +53,7 @@ K = 9
 
 ![KNN_9_test_file](https://github.com/jy-canucks1/Animal-recognition-by-MFCC/assets/84373345/1a6bdb6f-529f-4468-99f1-fc8fb8af5813)
 
-(K >= 11 was not denoted since the accuracy was lower than K = 9)
+(K >= 11 was not denoted since all the accuracies were lower than K = 9)
 
 ### AdaBoost
 ___
