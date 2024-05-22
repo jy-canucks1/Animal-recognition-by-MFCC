@@ -7,7 +7,7 @@ Part 2 : Train Animal Sound Recognition Models
 ## Dataset
 
 * The dataset is from: [https://github.com/YashNita/Animal-Sound-Dataset](https://github.com/YashNita/Animal-Sound-Dataset)
-* Converted Stereo to Mono and then Removed the stereo file
+* Converted Stereo to Mono and then Removed all the stereo files
 * Each mfcc is truncated or padded with 0 to keep the same size of mfcc coefficients sample (130, 13)
 * Normalized with means and standard deviations of each of 13 mfcc coefficients
 
