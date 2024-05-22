@@ -32,7 +32,7 @@ Result:
 
 K = 5 
 
-Test Accuracy: 0.8571
+Test Accuracy (per file): 0.8571
 
 ![KNN_5_val](https://github.com/jy-canucks1/Animal-recognition-by-MFCC/assets/84373345/58ff7632-dcc9-4114-8b82-6b7383c9754b)
 
@@ -42,7 +42,7 @@ Test Accuracy: 0.8571
 
 K = 7
 
-Test Accuracy: 0.8571
+Test Accuracy (per file): 0.8571
 
 ![KNN_7_val](https://github.com/jy-canucks1/Animal-recognition-by-MFCC/assets/84373345/273a8506-9688-48df-9a44-1e51ab2826d3)
 
@@ -52,7 +52,7 @@ Test Accuracy: 0.8571
 
 K = 9
 
-Test Accuracy: 0.8629
+Test Accuracy (per file): 0.8629
 
 ![KNN_9_val](https://github.com/jy-canucks1/Animal-recognition-by-MFCC/assets/84373345/55e500e8-2bda-4735-9314-e628e03bafa2)
 
@@ -65,7 +65,7 @@ Test Accuracy: 0.8629
 ### AdaBoost
 ___
 
-Test Accuracy: 0.6686
+Test Accuracy (per file): 0.6686
 
 ![AdaBoost_val](https://github.com/jy-canucks1/Animal-recognition-by-MFCC/assets/84373345/cc7187e9-616c-4e27-b0bf-14e8734682b6)
 
