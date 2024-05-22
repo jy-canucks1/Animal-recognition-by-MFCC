@@ -85,7 +85,7 @@ ___
 
 ### KNN wins, CNN is the second, and AdaBoost was the last
 ___
-
+* KNN(k=9): 0.8629, CNN: 0.8057, AdaBoost: 0.6686
 * CNN might have had better result if the total frame length was constant for all audio files. Some mfcc specturm images have been cut out during preprocessing.
 * AdaBoost did not work well with imbalanced dataset. (For only classes with 200 files, it worked relatively well.)
 
