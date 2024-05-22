@@ -1,5 +1,6 @@
 load("MFCCdataset.mat");
 
+%% Training and Validation Part
 features = [];
 labels = [];
 allLabels = adsTrain.Labels;
@@ -8,20 +9,22 @@ frameNum = 130;
 for ii = 1:numel(mfccs)
 
     thismfcc = mfccs{ii};
-   
+    % Since each file has different length, pad 0 or truncate 
+    % to keep same framelength(frameNum)
     if size(thismfcc,1) < frameNum
         thismfcc = padarray(thismfcc, (frameNum - size(thismfcc,1)), 0, 'post');
     elseif size(thismfcc,1) > frameNum
         thismfcc = thismfcc(1:frameNum,:);
         
     end
+    % Label each frame
     label = repelem(allLabels(ii),size(thismfcc,1));
     
     features = [features;thismfcc];
     labels = [labels,label];
 end
 
-
+% Normalization and reshaping of dataset(Train)
 M = mean(features,1);
 S = std(features,[],1);
 features = (features-M)./S;
@@ -29,7 +32,7 @@ features = (features-M)./S;
 
 trainedClassifier = fitcknn(features,labels, ...
     Distance="euclidean", ...
-    NumNeighbors=5, ...
+    NumNeighbors=15, ...
     DistanceWeight="squaredinverse", ...
     Standardize=false, ...
     ClassNames=unique(labels));
@@ -44,6 +47,7 @@ figure(Units="normalized",Position=[0.4 0.4 0.4 0.4])
 confusionchart(labels,validationPredictions,title="Validation Accuracy", ...
     ColumnSummary="column-normalized",RowSummary="row-normalized");
 
+%% Testing Part
 features_ts = [];
 labels_ts = [];
 numVectorsPerFile = [];
@@ -70,6 +74,8 @@ for ii = 1:numel(mfccs_ts)
     features_ts = [features_ts;thismfcc];
     labels_ts = [labels_ts,label];
 end
+
+% Normalization and reshaping of dataset(Test)
 features_ts = (features_ts-M)./S;
 
 prediction = predict(trainedClassifier,features_ts);
@@ -91,3 +97,12 @@ end
 figure(Units="normalized",Position=[0.4 0.4 0.4 0.4])
 confusionchart(adsTest.Labels,r2,title="Test Accuracy (Per File)", ...
     ColumnSummary="column-normalized",RowSummary="row-normalized");
+
+accuracy = sum(adsTest.Labels == r2)/numel(adsTest.Labels)
+%% Accuracy (k: NumNeighbors)
+% k=5 -> 0.8571
+% k=7 -> 0.8571
+% k=9 -> 0.8629
+% k=11 -> 0.8514
+% k=13 -> 0.8571
+% k=15 -> 0.8571

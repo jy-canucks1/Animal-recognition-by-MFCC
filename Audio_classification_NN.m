@@ -1,5 +1,6 @@
 load("MFCCdataset.mat");
 
+%% Train Set
 features = [];
 features1 = [];
 labels = [];
@@ -9,7 +10,8 @@ frameNum = 130;
 for ii = 1:numel(mfccs)
 
     thismfcc = mfccs{ii};
-   
+    % Since each file has different length, pad 0 or truncate 
+    % to keep same framelength(frameNum)
     if size(thismfcc,1) < frameNum
         thismfcc = padarray(thismfcc, (frameNum - size(thismfcc,1)), 0, 'post');
     elseif size(thismfcc,1) > frameNum
@@ -23,7 +25,7 @@ for ii = 1:numel(mfccs)
     labels = [labels,label];
 end
 
-% Normalization and reshaping of dataset
+% Normalization and reshaping of dataset(Train)
 M = mean(features1,1);
 S = std(features1,[],1);
 
@@ -34,10 +36,9 @@ features = (features-M1)./S1;
 features = reshape(features, frameNum, 13, 1, size(labels,2));
 
 
-
+%% Test Set
 features_ts = [];
 labels_ts = [];
-
 
 allLabels_ts = adsTest.Labels;
 
@@ -59,13 +60,14 @@ for ii = 1:numel(mfccs_ts)
     labels_ts = [labels_ts,label];
 end
 
-% Normalization and reshaping of dataset
+% Normalization and reshaping of dataset(Test)
 M2 = repmat(M,1,size(mfccs_ts,1));
 S2 = repmat(S,1,size(mfccs_ts,1));
 features_ts = (features_ts-M2)./S2;
 features_ts = reshape(features_ts, frameNum, 13,1, size(labels_ts,2));
 
-numSpeakers = numel(unique(ads.Labels));
+%% Creating Layer
+numAnimals = numel(unique(ads.Labels));
 
 layers = [   
 
@@ -95,22 +97,24 @@ layers = [
     fullyConnectedLayer(256)
     batchNormalizationLayer
     leakyReluLayer(0.2)
+
     fullyConnectedLayer(256)
     batchNormalizationLayer
     leakyReluLayer(0.2)
+
     fullyConnectedLayer(256)
     batchNormalizationLayer
     leakyReluLayer(0.2)
-    fullyConnectedLayer(numSpeakers)
+
+    fullyConnectedLayer(numAnimals)
     softmaxLayer 
     classificationLayer];
-%%
+
+%% Layer Summary
 analyzeNetwork(layers)
-size(features);
-size(labels);
-size(features_ts);
-size(labels_ts);
-%%
+
+
+%% Training and Testing Part
 
 numEpochs = 20;
 miniBatchSize = 100;
@@ -127,10 +131,12 @@ options = trainingOptions("sgdm", ...
 
 [convNet,convNetInfo] = trainNetwork(features,labels,layers,options);
 
-%%
-
 predictions = classify(convNet,features_ts);
-prediction = categorical(string(prediction));
+predictions = categorical(string(predictions));
 figure(Units="normalized",Position=[0.4 0.4 0.4 0.4])
 confusionchart(labels_ts,predictions,title="Test Accuracy", ...
     ColumnSummary="column-normalized",RowSummary="row-normalized");
+accuracy = sum(adsTest.Labels == predictions)/numel(adsTest.Labels)
+
+%% Accuracy 
+% 0.8057

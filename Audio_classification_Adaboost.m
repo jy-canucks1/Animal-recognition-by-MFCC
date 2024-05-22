@@ -1,5 +1,6 @@
 load("MFCCdataset.mat");
 
+%% Training and Validation Part
 features = [];
 labels = [];
 allLabels = adsTrain.Labels;
@@ -8,18 +9,21 @@ frameNum = 130;
 for ii = 1:numel(mfccs)
 
     thismfcc = mfccs{ii};
+    % Since each file has different length, pad 0 or truncate 
+    % to keep same framelength(frameNum)
     if size(thismfcc,1) < frameNum
         thismfcc = padarray(thismfcc, (frameNum - size(thismfcc,1)), 0, 'post');
     elseif size(thismfcc,1) > frameNum
         thismfcc = thismfcc(1:frameNum,:);
         
     end
+    % Label each frame
     label = repelem(allLabels(ii),size(thismfcc,1));
     features = [features;thismfcc];
     labels = [labels,label];
 end
 
-
+% Normalization and reshaping of dataset(Train)
 M = mean(features,1);
 S = std(features,[],1);
 features = (features-M)./S;
@@ -62,6 +66,7 @@ for ii = 1:numel(mfccs_ts)
     features_ts = [features_ts;thismfcc];
     labels_ts = [labels_ts,label];
 end
+% Normalization and reshaping of dataset(Test)
 features_ts = (features_ts-M)./S;
 
 prediction = predict(trainedClassifier,features_ts);
@@ -84,3 +89,7 @@ figure(Units="normalized",Position=[0.4 0.4 0.4 0.4])
 confusionchart(adsTest.Labels,r2,title="Test Accuracy (Per File)", ...
     ColumnSummary="column-normalized",RowSummary="row-normalized");
 
+accuracy = sum(adsTest.Labels == r2)/numel(adsTest.Labels)
+
+%% Accuracy 
+% 0.6686
