@@ -73,7 +73,7 @@ layers = [
 
     imageInputLayer([frameNum 13 1])
 
-    % Three convolutional layer
+    % Three convolutional layers
     
     convolution2dLayer(64,64,padding="same")
     batchNormalizationLayer
