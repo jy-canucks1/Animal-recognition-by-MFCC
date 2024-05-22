@@ -73,14 +73,12 @@ layers = [
 
     imageInputLayer([frameNum 13 1])
 
-    % First convolutional layer
+    % Three convolutional layer
     
     convolution2dLayer(64,64,padding="same")
     batchNormalizationLayer
     leakyReluLayer(0.2)
     maxPooling2dLayer(2,Stride=2)
-    
-    % This layer is followed by 2 convolutional layers
     
     convolution2dLayer(32,32,padding="same")
     batchNormalizationLayer
