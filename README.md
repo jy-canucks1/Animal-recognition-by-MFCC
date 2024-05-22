@@ -30,7 +30,9 @@ ___
 
 Result:
 
-K = 5
+K = 5 
+
+Test Accuracy: 0.8571
 
 ![KNN_5_val](https://github.com/jy-canucks1/Animal-recognition-by-MFCC/assets/84373345/58ff7632-dcc9-4114-8b82-6b7383c9754b)
 
@@ -40,6 +42,8 @@ K = 5
 
 K = 7
 
+Test Accuracy: 0.8571
+
 ![KNN_7_val](https://github.com/jy-canucks1/Animal-recognition-by-MFCC/assets/84373345/273a8506-9688-48df-9a44-1e51ab2826d3)
 
 ![KNN_7_test_frame](https://github.com/jy-canucks1/Animal-recognition-by-MFCC/assets/84373345/fb6b9b6a-f1e6-4f0e-bf37-a45424cdaa9a)
@@ -47,6 +51,8 @@ K = 7
 ![KNN_7_test_file](https://github.com/jy-canucks1/Animal-recognition-by-MFCC/assets/84373345/1efa87fb-37ce-4d73-91b7-22f6bba0deff)
 
 K = 9
+
+Test Accuracy: 0.8629
 
 ![KNN_9_val](https://github.com/jy-canucks1/Animal-recognition-by-MFCC/assets/84373345/55e500e8-2bda-4735-9314-e628e03bafa2)
 
@@ -59,6 +65,8 @@ K = 9
 ### AdaBoost
 ___
 
+Test Accuracy: 0.6686
+
 ![AdaBoost_val](https://github.com/jy-canucks1/Animal-recognition-by-MFCC/assets/84373345/cc7187e9-616c-4e27-b0bf-14e8734682b6)
 
 ![AdaBoost_test_frame](https://github.com/jy-canucks1/Animal-recognition-by-MFCC/assets/84373345/66dae590-d370-4f6c-955b-9b2360a1f09f)
@@ -68,6 +76,8 @@ ___
 
 ### CNN (Convolutional Neural Network)
 ___
+
+Test Accuracy: 0.8057
 
 ![CNN_training_progress](https://github.com/jy-canucks1/Animal-recognition-by-MFCC/assets/84373345/5e38d246-0e6e-464a-a1de-27b00616cea2)
 
